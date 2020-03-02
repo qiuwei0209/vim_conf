@@ -3,6 +3,7 @@
 " Vundle setting
 """"""""""""""""""""""""""""""
 set nocompatible        " be iMproved
+set backspace=indent,eol,start
 filetype off            " required!
 
 set rtp+=~/.vim/bundle/vundle/
@@ -59,7 +60,7 @@ nmap . 
 if has("cscope")
 set csprg=/usr/bin/cscope
 set csto=1
-set cst 
+set cst
 set nocsverb
 
 if filereadable("cscope.out")
@@ -89,7 +90,7 @@ nmap / *
 """"""""""""""""""""""""""""""
 " winManager setting
 """"""""""""""""""""""""""""""
-let g:AutoOpenWinManager = 1                                                                                      
+let g:AutoOpenWinManager = 1
 "let g:winManagerWindowLayout='FileExplorer|TagList'
 let g:winManagerWindowLayout='NERDTree|TagList'
 let g:winManagerWidth = 30
@@ -115,7 +116,7 @@ endfunction
 """"""""""""""""""""""""""""""
 " vim-airline setting
 """"""""""""""""""""""""""""""
-let g:airline_powerline_fonts=1 
+let g:airline_powerline_fonts=1
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
 endif
@@ -130,11 +131,11 @@ nnoremap <F10> :bn<CR>
 " nerdcommenter setting
 " \cc 注释当前行和选中行
 " \cu 取消注释
-" \ci 执行反转注释操作，选中区域注释部分取消注释，非注释部分添加注释 
-" \cA 跳转到该行结尾添加注释，并进入编辑模式 
-" \cs 添加性感的注释，代码开头介绍部分通常使用该注释 
+" \ci 执行反转注释操作，选中区域注释部分取消注释，非注释部分添加注释
+" \cA 跳转到该行结尾添加注释，并进入编辑模式
+" \cs 添加性感的注释，代码开头介绍部分通常使用该注释
 """"""""""""""""""""""""""""""
-nmap  <leader>ci 
+nmap  <leader>ci
 
 
 """"""""""""""""""""""""""""""
@@ -158,7 +159,7 @@ set fileencodings=utf-8,gbk
 set expandtab                   "建议开启expandtab选项，会自动将tab扩展很空格，代码缩进会更美观
 "set noexpandtab
 set cino=g0,:0                  "switch case 对齐风格
-set mouse=n                     "普通模式使用鼠标                                                          
+set mouse=n                     "普通模式使用鼠标
 
 colorscheme molokai             "主题配色
 set t_Co=256
