@@ -167,6 +167,7 @@ set t_Co=256
 " diff color
 if &diff
     colorscheme evening
+    set noreadonly
 endif
 
 " KEY MAP
