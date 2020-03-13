@@ -164,6 +164,12 @@ set mouse=n                     "普通模式使用鼠标
 colorscheme molokai             "主题配色
 set t_Co=256
 
+" diff color
+if &diff
+    colorscheme evening
+endif
+
+" KEY MAP
 nmap <F4> :set nonu<CR>
 nmap [26~ :set nu<CR>
 
