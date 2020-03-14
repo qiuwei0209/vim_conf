@@ -150,10 +150,10 @@ set autoindent                  "自动缩进与C语言风格缩进
 set cindent                     "以C/C++的模式缩进
 set hlsearch                    "搜索高亮
 set tabstop=4                   "设定 tab 长度为 4
-set softtabstop=4               " 使得按退格键时可以一次删掉 4 个空格,不足 4 个时删掉所有剩下的空格）
+set softtabstop=4               "使得按退格键时可以一次删掉 4 个空格,不足 4 个时删掉所有剩下的空格）
 set shiftwidth=4                "设定 << 和 >> 命令移动时的宽度为 4
 set nu                          "显示行号
-set cursorline                  " 突出显示当前行
+set cursorline                  "突出显示当前行
 let &termencoding=&encoding     "显示中文
 set fileencodings=utf-8,gbk
 set expandtab                   "建议开启expandtab选项，会自动将tab扩展很空格，代码缩进会更美观
