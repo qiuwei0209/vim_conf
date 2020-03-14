@@ -1,9 +1,8 @@
-# vim_conf
-This is my vim config file
+# vim config file
+This is my vim config file.
 
-# how to use
-* enter your home path
+# How to use
 * git clone https://github.com/qiuwei0209/vim_conf.git
-* mv vim_conf .vim
-* mv .vim/vimrc .vimrc
+* mv vim_conf/* ~/
+* Then open vim, input ':BundleInstall'
 
