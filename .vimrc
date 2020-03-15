@@ -1,57 +1,115 @@
+"""""""""""""""""""""""""""
+" vim-plug
+"""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+
+Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'luochen1990/rainbow'
+
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/winmanager'
+Plug 'preservim/nerdtree'
+
+Plug 'preservim/nerdcommenter'
+Plug 'junegunn/vim-easy-align'
+Plug 'liuchengxu/vim-which-key'
+Plug 'ervandew/supertab'
+
+"Plug 'vim-scripts/cscope.vim'
+
+call plug#end()
+
+
 
 """"""""""""""""""""""""""""""
-" Vundle setting
+"" myself setting
 """"""""""""""""""""""""""""""
-set nocompatible        " be iMproved
+filetype plugin on
+syntax enable                   " 语法高亮
+colorscheme molokai             " 主题配色
+set hlsearch                    " 搜索高亮
+set autoindent                  " 自动缩进与C语言风格缩进
+set cindent                     " 以C/C++的模式缩进
+set tabstop=4                   " 设定 tab 长度为 4
+set softtabstop=4               " 使得按退格键时可以一次删掉 4 个空格,不足 4 个时删掉所有剩下的空格
+set shiftwidth=4                " 设定 << 和 >> 命令移动时的宽度为 4
+set nu                          " 显示行号
+set cursorline                  " 突出显示当前行
+set expandtab                   " 建议开启expandtab选项，会自动将tab扩展很空格，代码缩进会更美观
+"set noexpandtab
+set cino=g0,:0                  " switch case 对齐风格
+set mouse=n                     " 普通模式使用鼠标
+let &termencoding=&encoding     " 显示中文
+set fileencodings=utf-8,gbk
+set nocompatible                " 修复backspace无效问题
 set backspace=indent,eol,start
-filetype off            " required!
+set timeoutlen=500
+set t_Co=256
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+"diff color
+if &diff
+    colorscheme evening
+    set noreadonly
+endif
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+"KEY MAP
+nnoremap <F7> :q<CR>
+nnoremap <F8> :w<CR>
 
-" 可以通过以下四种方式指定插件的来源
-" a) 指定Github中vim-scripts仓库中的插件，直接指定插件名称即可，插件明中的空格使用“-”代替。
-"Bundle 'L9'
-Bundle 'taglist.vim'
-Bundle 'winmanager'
+nnoremap <F11> 
+nnoremap <F12> 
 
-" b) 指定Github中其他用户仓库的插件，使用“用户名/插件名称”的方式指定
-"Bundle 'tpope/vim-fugitive'
-"Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-"Bundle 'tpope/vim-rails.git'
-Bundle 'scrooloose/nerdtree'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tomasr/molokai'
-Bundle 'vim-airline/vim-airline'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'ervandew/supertab'
-
-
-" c) 指定非Github的Git仓库的插件，需要使用git地址
-"Bundle 'git://git.wincent.com/command-t.git'
-
-" d) 指定本地Git仓库中的插件
-"Bundle 'file:///Users/gmarik/path/to/plugin'
-
-filetype plugin indent on     " required!
 
 
 
 """"""""""""""""""""""""""""""
-" taglist setting
+"" vim-which-key setting
 """"""""""""""""""""""""""""""
-nnoremap <F5> :TlistToggle<CR>
-let Tlist_Show_One_File=1      "只显示当前文件的tags
-let Tlist_Exit_OnlyWindow=1    "tagList窗口是最后一个窗口，则退出Vim
+let g:mapleader="\<Space>"
+let g:maplocalleader = ","
 
-nmap , 
-nmap . 
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
+call which_key#register('<Space>', "g:which_key_map")
+call which_key#register(',', "g:qv_map")
+
+let g:qv_map = {}
+let g:qv_map.s = {
+      \ 'name'  : '+source' ,
+      \ '<Tab>' : ['WMToggle'  , 'Tree-Window']       ,
+      \ }
+
+
+
+let g:which_key_map = {}
+
+let g:which_key_map.f = {
+    \ 'name' : '+File',
+    \ 'f' : [':q!'    ,  'Force Quit']      ,
+    \ 'q' : [':q'     ,  'Quit']            ,
+    \ 's' : [':wq'    ,  'Save Quit']       ,
+    \ 'w' : [':w'     ,  'Save']            ,
+    \ }
+
+let g:which_key_map.w = {
+    \ 'name'  : '+Window' ,
+    \ 'w' : ['WMToggle'         ,  'Winmanager']            ,
+    \ 'n' : ['NERDTreeToggle'   ,  'Nerdtree']              ,
+    \ 't' : ['TlistToggle'      ,  'Tlist']           ,
+    \ 'e' : ['Explore'          ,  'Explore']               ,
+    \ '2' : ['<C-W>v'           ,  'split-window']    ,
+    \ }
+
+
+
+""""""""""""""""""""""""""""""
+"" molokai setting
+""""""""""""""""""""""""""""""
+let g:molokai_original=1
+let g:rehash256=1
 
 
 """"""""""""""""""""""""""""""
@@ -71,20 +129,53 @@ endif
 set csverb
 endif
 
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>i :cs find i ^<C-R>=expand("<cword>")<CR>$<CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>i :cs find i ^<C-R>=expand("<cword>")<CR>$<CR>
+nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-nmap k g
-nmap l c
-nmap ; s
-nmap / *
+nnoremap k g
+nnoremap l c
+nnoremap ; s
+nnoremap / *
 
+
+""""""""""""""""""""""""""""""
+" taglist setting
+""""""""""""""""""""""""""""""
+let Tlist_Show_One_File=1      "只显示当前文件的tags
+let Tlist_Exit_OnlyWindow=1    "tagList窗口是最后一个窗口，则退出Vim
+
+nnoremap [[E :TlistToggle<CR>
+nnoremap , 
+nnoremap . 
+
+
+""""""""""""""""""""""""""""""
+" nerdtree setting
+" https://github.com/preservim/nerdtree
+""""""""""""""""""""""""""""""
+let g:NERDTree_title = "[NERDTree]"
+let NERDTreeCaseSensitiveSort=1
+let NERDTreeChDirMode=1 " 改变tree目录的同时改变工程的目录
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+function! NERDTree_Start()
+    exe 'NERDTree'
+endfunction
+
+function! NERDTree_IsValid()
+    return 1
+endfunction
 
 
 """"""""""""""""""""""""""""""
@@ -94,23 +185,7 @@ let g:AutoOpenWinManager = 1
 "let g:winManagerWindowLayout='FileExplorer|TagList'
 let g:winManagerWindowLayout='NERDTree|TagList'
 let g:winManagerWidth = 30
-nmap <F6> :WMToggle<CR>
-nmap <F2> :Explore<CR>
-
-
-""""""""""""""""""""""""""""""
-" nerdtree setting
-""""""""""""""""""""""""""""""
-let g:NERDTree_title = "[NERDTree]"
-let NERDTreeCaseSensitiveSort=1
-let NERDTreeChDirMode=1 " 改变tree目录的同时改变工程的目录
-function! NERDTree_Start()
-    exe 'NERDTree'
-endfunction
-
-function! NERDTree_IsValid()
-    return 1
-endfunction
+nnoremap <F6> :WMToggle<CR>
 
 
 """"""""""""""""""""""""""""""
@@ -129,13 +204,17 @@ nnoremap <F10> :bn<CR>
 
 """"""""""""""""""""""""""""""
 " nerdcommenter setting
-" \cc 注释当前行和选中行
-" \cu 取消注释
-" \ci 执行反转注释操作，选中区域注释部分取消注释，非注释部分添加注释
-" \cA 跳转到该行结尾添加注释，并进入编辑模式
-" \cs 添加性感的注释，代码开头介绍部分通常使用该注释
+" https://github.com/preservim/nerdcommenter
 """"""""""""""""""""""""""""""
-nmap  <leader>ci
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDAltDelims_java = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+let g:NERDCustomDelimiters = { 'c': { 'left': '//','right': '' } }
+nmap  <leader>c<space>
 
 
 """"""""""""""""""""""""""""""
@@ -144,40 +223,37 @@ nmap  <leader>ci
 let g:SuperTabRetainCompletionType=2
 "let g:SuperTabDefaultCompletionType="<C-8>"
 
-"add by qv
-syntax enable                   "语法高亮
-set autoindent                  "自动缩进与C语言风格缩进
-set cindent                     "以C/C++的模式缩进
-set hlsearch                    "搜索高亮
-set tabstop=4                   "设定 tab 长度为 4
-set softtabstop=4               "使得按退格键时可以一次删掉 4 个空格,不足 4 个时删掉所有剩下的空格）
-set shiftwidth=4                "设定 << 和 >> 命令移动时的宽度为 4
-set nu                          "显示行号
-set cursorline                  "突出显示当前行
-let &termencoding=&encoding     "显示中文
-set fileencodings=utf-8,gbk
-set expandtab                   "建议开启expandtab选项，会自动将tab扩展很空格，代码缩进会更美观
-"set noexpandtab
-set cino=g0,:0                  "switch case 对齐风格
-set mouse=n                     "普通模式使用鼠标
 
-colorscheme molokai             "主题配色
-set t_Co=256
-
-" diff color
-if &diff
-    colorscheme evening
-    set noreadonly
-endif
-
-" KEY MAP
-nmap <F4> :set nonu<CR>
-nmap [26~ :set nu<CR>
-
-nnoremap <F7> :q<CR>
-nnoremap <F8> :w<CR>
-
-nmap <F11> 
-nmap <F12> 
+""""""""""""""""""""""""""""""
+" rainbow setting
+" https://github.com/luochen1990/rainbow
+""""""""""""""""""""""""""""""
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+    \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+    \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+    \   'operators': '_,_',
+    \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+    \   'separately': {
+    \       '*': {},
+    \       'tex': {
+    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+    \       },
+    \       'lisp': {
+    \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+    \       },
+    \       'vim': {
+    \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+    \       },
+    \       'html': {
+    \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+    \       },
+    \       'css': 0,
+    \   }
+    \}
 
 
+""""""""""""""""""""""""""""""
+" vim-easy-align setting
+" https://github.com/junegunn/vim-easy-align
+""""""""""""""""""""""""""""""
