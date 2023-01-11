@@ -42,7 +42,9 @@ set expandtab                   " 建议开启expandtab选项，会自动将tab�
 set cino=g0,:0                  " switch case 对齐风格
 set mouse=n                     " 普通模式使用鼠标
 let &termencoding=&encoding     " 显示中文
-set fileencodings=utf-8,gbk
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
 set nocompatible                " 修复backspace无效问题
 set backspace=indent,eol,start
 set timeoutlen=500

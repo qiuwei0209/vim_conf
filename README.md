@@ -6,4 +6,4 @@ This is my vim config file.
 * mv vim_conf/vim ~/.vim
 * mv vim_conf/vimrc ~/.vimrc
 * Then open vim, input ':PlugInstall'
-
+* apt install exuberant-ctags
